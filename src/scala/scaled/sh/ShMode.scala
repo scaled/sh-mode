@@ -26,6 +26,14 @@ object ShConfig extends Config.Defs {
     effacer("storage", variableStyle)
   )
 
+  // maps TextMate grammar scopes to Scaled syntax definitions
+  val syntaxers = List(
+    syntaxer("comment.line", Syntax.LineComment),
+    syntaxer("comment.block", Syntax.DocComment),
+    syntaxer("constant", Syntax.OtherLiteral),
+    syntaxer("string", Syntax.StringLiteral)
+  )
+
   val grammars = resource("sh.ndf")(Grammar.parseNDFs)
 }
 
@@ -41,6 +49,7 @@ class ShMode (env :Env) extends GrammarCodeMode(env) {
   override def configDefs = ShConfig :: super.configDefs
   override def grammars = ShConfig.grammars.get
   override def effacers = ShConfig.effacers
+  override def syntaxers = ShConfig.syntaxers
 
   // override def createIndenter() = new XmlIndenter(buffer, config)
   override val commenter = new Commenter()
