@@ -52,5 +52,9 @@ class ShMode (env :Env) extends GrammarCodeMode(env) {
   override def syntaxers = ShConfig.syntaxers
 
   // override def createIndenter() = new XmlIndenter(buffer, config)
-  override val commenter = new Commenter()
+  override val commenter = new Commenter() {
+    override def linePrefix = "#"
+    override def blockPrefix = "#"
+    override def docOpen = "##"
+  }
 }
