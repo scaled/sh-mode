@@ -9,13 +9,14 @@ import scaled.code.Indenter
 import scaled.grammar._
 import scaled.code.{CodeConfig, Commenter}
 
-object ShConfig extends Config.Defs {
+@Plugin(tag="textmate-grammar")
+class ShGrammarPlugin extends GrammarPlugin {
   import EditorConfig._
   import CodeConfig._
-  import GrammarConfig._
 
-  // maps TextMate grammar scopes to Scaled style definitions
-  val effacers = List(
+  override def grammars = Map("source.shell" -> "sh.ndf")
+
+  override def effacers = List(
     effacer("comment.line", commentStyle),
     effacer("comment.block", docStyle),
     effacer("constant", constantStyle),
@@ -26,15 +27,12 @@ object ShConfig extends Config.Defs {
     effacer("storage", variableStyle)
   )
 
-  // maps TextMate grammar scopes to Scaled syntax definitions
-  val syntaxers = List(
+  override def syntaxers = List(
     syntaxer("comment.line", Syntax.LineComment),
     syntaxer("comment.block", Syntax.DocComment),
     syntaxer("constant", Syntax.OtherLiteral),
     syntaxer("string", Syntax.StringLiteral)
   )
-
-  val grammars = resource("sh.ndf")(Grammar.parseNDFs)
 }
 
 @Major(name="sh",
@@ -46,10 +44,7 @@ class ShMode (env :Env) extends GrammarCodeMode(env) {
 
   override def dispose () {} // nada for now
 
-  override def configDefs = ShConfig :: super.configDefs
-  override def grammars = ShConfig.grammars.get
-  override def effacers = ShConfig.effacers
-  override def syntaxers = ShConfig.syntaxers
+  override def langScope = "source.shell"
 
   // override def createIndenter() = new XmlIndenter(buffer, config)
   override val commenter = new Commenter() {

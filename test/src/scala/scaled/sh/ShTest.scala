@@ -24,8 +24,8 @@ class ShTest {
     /* 6*/ "  echo $zim",
     /* 7*/ "done").mkString("\n")
 
-  val sh = Grammar.parseNDF(getClass.getClassLoader.getResourceAsStream("sh.ndf"))
-  val grammars = List(sh)
+  val sh = Grammar.parseNDF(getClass.getClassLoader.getResource("sh.ndf"))
+  val grammars = Seq(sh)
 
   @Test def debugGrammar () {
     // xml.print(System.out)
