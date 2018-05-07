@@ -37,7 +37,8 @@ class ShGrammarPlugin extends GrammarPlugin {
 
 @Major(name="sh",
        tags=Array("code", "project", "sh"),
-       pats=Array(".*\\.sh", ".*\\.bash", "\\.profile", "\\.bash(rc|_profile|_login|_logout)"),
+       pats=Array(".*\\.sh", ".*\\.csh", ".*\\.fish",
+                  ".*\\.bash", "\\.profile", "\\.bash(rc|_profile|_login|_logout)"),
        ints=Array("bash", "sh", "csh", "ksh", "tcsh"),
        desc="A major mode for editing shell scripts.")
 class ShMode (env :Env) extends GrammarCodeMode(env) {
