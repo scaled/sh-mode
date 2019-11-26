@@ -27,7 +27,7 @@ class ShTest {
   val sh = Grammar.parseNDF(getClass.getClassLoader.getResource("sh.ndf"))
   val grammars = Seq(sh)
 
-  @Test def debugGrammar () {
+  @Test def debugGrammar () :Unit = {
     // xml.print(System.out)
     sh.scopeNames foreach println
 
